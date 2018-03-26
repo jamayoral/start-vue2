@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title Curso de VueJS 2 - JAMG></title>
+    <style>
+        .like {
+            background: green;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Instancias -->
+    <!-- Segunda instancia -->
+    <div id="segunda">
+        {{texto}}
+    </div>
+
+    <!-- Tercera instancia -->
+    <div id="tercera">
+        {{texto}}
+    </div>
+    </hr>
+
+    <main>
+        <!-- Componentes -->
+            <!-- Componentes dinámicos -->
+            <hr>
+            <button @click.prevent="elegido = 'posts'">Cargar posts</button>
+            <button @click.prevent="elegido = 'padre'">Cargar padre</button>
+            <button @click.prevent="elegido = 'hijo'">Cargar hijo</button>
+            <component v-bind:is="elegido"></component>
+
+            <hr>
+
+            <!-- Componentes anidados -->
+            <padre></padre>
+            <hr>
+            <peliculas></peliculas>
+
+            <!-- Componente con parametros de entrada -->
+            <frutas v-bind:objeto="superfruta"></frutas>
+
+            <!-- Componente con plantilla en linea -->
+            <frutas-inline v-bind:objeto="superfruta" inline-template>
+                <div class="componente-frutas">
+                    <h1> Componente Frutas Inline</h1>
+                    <h3>{{objeto.nombre}}</h3>
+                </div>
+            </frutas-inline>
+            <posts></posts>
+
+
+        <!-- Listado mostrado tras hacer llamada asincrona a servidor -->
+        <h1>Listado con Ajax</h1>
+        <ol>
+            <li v-for="post in posts">
+                {{ post.title }}
+            </li>
+        </ol>
+        <hr>
+
+        <!-- Propiedades computadas -->
+        <h1> {{nombre + ' ' + apellidos + ' - Nota: ' + nota }} </h1>
+        <h1> {{nombreYapellidos}} </h1>
+
+        <h4> Listado ordenado</h4>
+        <ul>
+            <li v-for="(pelicula, index) in peliculasOrdenadas">
+                {{ pelicula }}
+            </li>
+        </ul>
+
+        <h4> Busqueda frutas</h4>
+        <input type="search" v-model="busqueda" placeholder="Buscar fruta" />
+        <ol>
+            <!-- Binding -->
+            <li @click.prevent="marcar(index)" v-bind:class="{like: index == confirmado}" v-for="(fruta, index) in buscarFruta">
+                {{ fruta.nombre | mayusculas}}
+            </li>
+        </ol>
+
+        </hr>
+
+        <!-- Filtros -->
+        <h1> {{nombreYapellidos | mayusculas}} </h1>
+
+        <hr>
+
+        <!-- Interpolación / Imprimir el contenido de una variable del modelo / instancia VueJS -->
+        <h1> {{ texto }}</h1>
+        <h2 v-text="texto"></h2>
+        <hr>
+
+        <!-- Two way data binding / Enlace de dtos bidireccional y la reactividad -->
+        <input type="text" v-model="nombre" />
+        <p>El nombre es: {{ nombre }}</p>
+        <hr>
+
+        <!-- Directivas condicionales v-if -->
+        Nota: &nbsp;
+        <input type="number" v-model="nota">
+        <br>
+        <strong v-if="nota == 100"> La nota es {{ nota }} es excelente </strong>
+        <strong v-else-if="nota >= 5 && nota != 100"> La nota es {{ nota }} has aprobado </strong>
+        <span v-else> La nota es {{ nota }} has suspendido </span>
+        <hr>
+
+        <!-- Directiva de bucles v-for -->
+        <h1> Listado de películas (Array)</h1>
+        <ol>
+            <li v-for="pelicula in peliculas">
+                {{ pelicula }}
+            </li>
+        </ol>
+
+        <h1> Listado de frutas (Array de objetos)</h1>
+        <ul>
+            <li v-for="(fruta,index) in frutas">
+                {{index}}: {{ fruta.nombre }} - {{ fruta.temporada }}
+            </li>
+        </ul>
+
+        <h1> Listado de elementos de superfruta (Objeto)</h1>
+        <ul>
+            <li v-for="(value,key,index) in superfruta">
+                {{index}}: {{ key }} - {{ value }}
+            </li>
+        </ul>
+        <hr>
+
+        <!-- Formularios y eventos -->
+        <h1> Peliculas</h1>
+        <li v-for="(pelicula, index) in peliculas">
+            {{ pelicula }}
+            <button @click.prevent="borrarPelicula(index)"> Eliminar pelicula</button>
+        </li>
+
+        <form @submit.prevent="crearPelicula()">
+            <input type="text" v-model="peliculaNueva">
+            <input type="submit" value="Guardar pelicula">
+        </form>
+
+        <!--  <button v-on:click="crearPelicula()"> Crear pelicula</button>
+        <button @click.prevent="borrarPelicula()"> Eliminar pelicula</button> -->
+
+        <pre>
+          {{ $data }}
+        </pre>
+    </main>
+
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
