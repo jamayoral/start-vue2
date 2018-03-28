@@ -25,7 +25,6 @@ Starting with VueJS2
     -	Varias instancias
     -	Binding de clases
     -	Ajax y HTTP
-
 - Componentes
     -	Componentes básicos
     -	Plantillas en línea y props
