@@ -12,3 +12,23 @@ Starting with VueJS2
     - npm install
     - npm run dev
     - http://localhost:8080/home
+
+---------------------------------------------------
+Introducción a VueJs2
+Las bases de VueJS2
+-	Two way data binding y reactividad
+-	Directivas condicionales
+-	Listado
+-	Eventos
+-	Propiedades computadas
+-	Filtros
+-	Varias instancias
+-	Binding de clases
+-	Ajax y HTTP
+Componentes
+-	Componentes básicos
+-	Plantillas en línea y props
+-	Interacción entre componentes
+-	Componentes dinámicos
+Vue CLI
+El código mostrado en la charla se compartirá al finalizar la misma.
